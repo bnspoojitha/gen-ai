@@ -1,0 +1,15 @@
+.footer{
+    display:flex;
+}
+.searchBox{
+    display: 'flex';
+    flex-direction: column;
+}
+.searchBar{
+    display:flex;
+    flex-direction: row;
+}
+.downloadChatbtn{
+    margin-left: 238px;
+    height: 23px;
+}

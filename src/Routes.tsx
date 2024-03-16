@@ -6,8 +6,7 @@ import Home from "./components/home";
 export default function Links() {
         return (
             <Routes>
-                  <Route path="/" element={<Home />} />
-                <Route path="/chat" element={<Chat />} />
+                <Route path="/" element={<Chat />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         );

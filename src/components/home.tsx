@@ -75,8 +75,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Home() {
   console.log("Home");
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-  
+    const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
       setOpen(true);
     };
@@ -126,7 +125,7 @@ export default function Home() {
           <List>
             {[
               { text: 'Profile', path: '/profile', icon: <InboxIcon /> },
-              { text: 'Chat', path: '/chat', icon: <InboxIcon /> },
+              { text: 'Chat', path: '/', icon: <InboxIcon /> },
               { text: 'Settings', path: '/settings', icon: <InboxIcon /> },
             ].map(({ text, path, icon }, index) => (
               <ListItem key={text} disablePadding>
@@ -143,7 +142,7 @@ export default function Home() {
         </Drawer>
           <Main open={open}>
             <DrawerHeader />
-              <Routes />
+            <Routes />
           </Main>
         </Box>
       );

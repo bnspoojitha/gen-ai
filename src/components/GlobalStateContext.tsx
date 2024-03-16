@@ -4,8 +4,14 @@ import React, { createContext, useContext, Dispatch, SetStateAction } from 'reac
 type GlobalContextType = {
     searchText: string;
     setSearchText: React.Dispatch<React.SetStateAction<string>>;
-    chats: { text: string; type: string }[];
-    setChats: Dispatch<SetStateAction<{ text: string; type: string }[]>>; // Include setChats
+    chats: { text: string | any; type: string ; data?: any[] }[]; 
+    setChats: Dispatch<SetStateAction<{ text: string; type: string }[]>>;
+    chartHtml: string;
+    setChartHtml: React.Dispatch<React.SetStateAction<string>>; 
+    response: any; 
+    setResponse: Dispatch<SetStateAction<any>>; 
+    globalData: any[]; 
+    setGlobalData: Dispatch<SetStateAction<any[]>>
 };
 
 // Create the context

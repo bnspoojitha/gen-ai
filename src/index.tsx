@@ -1,24 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import App from './App';
 import Home from './components/home';
 import reportWebVitals from './reportWebVitals';
-import Routes from './Routes';
+import ReactDOM from 'react-dom/client'
 import { GlobalProvider } from './components/GlobalStateProvider'; // Import GlobalStateProvider
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter> {/* Wrap your application with BrowserRouter */}
-    <GlobalProvider> 
+  <GlobalProvider>
+    <Router>
       <Home />
-      </GlobalProvider>
-      {/* <Routes /> */}
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    </Router>
+  </GlobalProvider>
+</React.StrictMode>,
+  )
+  
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
