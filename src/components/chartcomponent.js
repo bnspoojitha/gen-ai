@@ -1,19 +1,46 @@
 
-import React from 'react';
+import React, { useCallback , useEffect, useRef} from 'react';
+import DownloadIcon from '@mui/icons-material/Download';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import './chartcomponent.css';
 
 const ChartComponent = (props, ref) => {
   const {chartHtml} = props;
+  const iframeRef = useRef(null);
+  const downloadPDF = () => {
+    const chartIframe = document.getElementById('chart-iframe');
+    const iframeContent = chartIframe.contentWindow.document.body;
+    html2canvas(iframeContent).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'px', [chartIframe.clientWidth, chartIframe.clientHeight]);
+      pdf.addImage(imgData, 'PNG', 0, 0);
+      pdf.save('chart.pdf');
+    });
+  };
+
+
+
+
+ 
   return (
-    <div id="viz-container"  style={{ width: '100%', margin: 'auto', textAlign: 'center' }}>
+    <div id="viz-container"  style={{ width: '100%', margin: 'auto', textAlign: 'center', paddingBottom:'25px' }}>
+      <div className='chartElement' style={{backgroundColor:'#ECF0F1', border:'1px solid #ccc', width:'600px'}}>
+        <a onClick={downloadPDF} style={{marginLeft:'536px', cursor:'pointer'}}>
+          <DownloadIcon />
+        </a>
       <iframe ref={ref}
         id='chart-iframe'
         title="Chart Visualization"
         srcDoc={chartHtml}
-        width="600" // Adjust width as needed
-        height="400" // Adjust height as needed
+        width="600" 
+        height="400"
         frameBorder="0"
-        style={{ border: '1px solid #ccc', borderRadius: '4px', marginTop: '20px', backgroundColor: '#ffff'}}
-      ></iframe>
+        style={{  borderRadius: '4px', marginTop: '20px',padding:'10px' }}
+      >
+      </iframe>  
+   
+        </div>
     </div>
   );
 };

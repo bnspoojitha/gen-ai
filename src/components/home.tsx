@@ -17,9 +17,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
-import Routes from "../Routes";
-import Chat from './chat';
+import { Link } from 'react-router-dom';
+import NotFound from "../pages/NotFound";
+import { useNavigate } from "react-router-dom";
+import Chat from "./chat";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -67,7 +69,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
@@ -75,6 +76,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Home() {
   console.log("Home");
     const theme = useTheme();
+    const navigate = useNavigate();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -125,11 +127,12 @@ export default function Home() {
           <List>
             {[
               { text: 'Profile', path: '/profile', icon: <InboxIcon /> },
-              { text: 'Chat', path: '/', icon: <InboxIcon /> },
+              { text: 'Chat', icon: <InboxIcon /> },
               { text: 'Settings', path: '/settings', icon: <InboxIcon /> },
             ].map(({ text, path, icon }, index) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton component={Link} to={path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                {/* <ListItemButton component={Link} to={path} style={{ textDecoration: 'none', color: 'inherit' }}> */}
+                <ListItemButton >
                   <ListItemIcon>
                     {icon}
                   </ListItemIcon>
@@ -142,7 +145,11 @@ export default function Home() {
         </Drawer>
           <Main open={open}>
             <DrawerHeader />
-            <Routes />
+            <Routes>
+                <Route path="/chat" element={<Chat />} />
+                {/* <Route path="*" element={<NotFound />} /> */}
+            </Routes>
+            <Chat />
           </Main>
         </Box>
       );

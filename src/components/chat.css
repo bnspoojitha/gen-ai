@@ -1,5 +1,64 @@
 .cardElement{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    width:100%;
+}
+#chat-container{
+    /* height: 80vh; */
+    overflow-y: auto !important;
+    /* max-height: calc(100vh - 100px); */
+    /* padding-bottom: 50px; */
+    position: relative !important; 
+    z-index: 0 !important; 
+}
+.searchElementHeading {
+    font-size: 22 ;
+     color: '#EA4403';
+      padding-left:'5px' ;
+}
+.chatContent{
+    max-height: '80vh';display: 'flex'; flex-direction: 'column'; width:"auto"; margin-left: 14px;
+}
+.iconColor{
+    font-size: 22 ;
+    color: '#EA4403'; 
+}
+.searchElementDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 25px;
+}
+.cardContent{
+    display: flex;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+   margin-right: 10px;;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+  }
+  .cardContainer{
+padding: 10px;
+  }
+  /* 
+.footer{
+    display: flex;
+    width: 82%;
+    justify-content: space-between;
+    padding: 5px;
+} */
+
+.chatPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }

@@ -1,0 +1,15 @@
+.custom-cell {
+    border: 1px solid #ccc; /* Add border to cells */
+    padding: 8px; /* Add padding to cells for better spacing */
+  }
+  
+  .custom-row {
+    border-bottom: 1px solid #ccc; /* Add border to bottom of rows */
+  }
+  .MuiDataGrid-colCellWrapper {
+    border: 1px solid #ccc; /* Add border to column headers */
+  }
+  .custom-header {
+    border: 1px solid #ccc; /* Add border to column headers */
+    padding: 8px; /* Add padding to column headers for better spacing */
+  }

@@ -1,11 +1,11 @@
 import React, { createContext, useContext, Dispatch, SetStateAction } from 'react';
+import { chatTypes, Chat } from './GlobalStateTypes';
 
-// Define the context type
 type GlobalContextType = {
     searchText: string;
     setSearchText: React.Dispatch<React.SetStateAction<string>>;
-    chats: { text: string | any; type: string ; data?: any[] }[]; 
-    setChats: Dispatch<SetStateAction<{ text: string; type: string }[]>>;
+    chats: Chat[]; 
+    setChats: Dispatch<SetStateAction<Chat[]>>; 
     chartHtml: string;
     setChartHtml: React.Dispatch<React.SetStateAction<string>>; 
     response: any; 
@@ -14,7 +14,7 @@ type GlobalContextType = {
     setGlobalData: Dispatch<SetStateAction<any[]>>
 };
 
-// Create the context
+
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 export const useGlobalState  = () => {
