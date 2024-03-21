@@ -3,6 +3,7 @@ import NotFound from "./pages/NotFound";
 import Chat from "./components/chat";
 import Home from "./components/home";
 import Login from "./pages/Login";
+import Main from "./components/main";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 export default function Links() {
@@ -17,6 +18,7 @@ export default function Links() {
                 <Route path="/" element={<Login />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/main" element={<Main />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         );

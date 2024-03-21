@@ -5,6 +5,10 @@ import ChartComponent from './chartcomponent';
 import { useGlobalState } from './GlobalStateContext';
 import './chartResponse.css';
 import { Resizable } from 'react-resizable';
+import DownloadIcon from '@mui/icons-material/Download';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import './chartcomponent.css';
 // import {IconButton} from '@mui/material';
 // import FullscreenIcon from '@mui/icons-material/Fullscreen';
 // import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
@@ -29,8 +33,6 @@ const ChartResponse = ({ chartHtml, response }: Props) => {
   const [message, setMessage] = useState<string>("");
   const [dataRows, setDataRows] = useState<any[]>([]);
   const [dataColumns, setDataColumns] = useState<any[]>([])
-  // const [rowsData, setRowsData] = useState([]);
-  // const [columnsData, setColumnsData] = useState([]);
   useEffect(() => {
     chats.forEach((chat) => {
       if (chat.type === "Message") {
@@ -65,19 +67,32 @@ const ChartResponse = ({ chartHtml, response }: Props) => {
 
     );
   };
+
   return (
     <Box className="responseBox" sx={{borderRadius: '5px', minHeight: '30px', p: 1, mt: 1, width: 'fit-content', wordBreak: 'break-word', }}>
-      {/* <IconButton color="inherit" style={{marginLeft: '614px'}} onClick={toggleFullscreen}>{isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</IconButton> */}
       <div className="content flex p-3" >
         <div className="botdetails" style={{ paddingBottom: '10px', display: 'flex', }}>
           <Avatar sx={{ bgcolor: '#EA4403', width: 25, height: 25, }} src="/broken-image.jpg" />
           <div>
             <span className="userName" style={{ paddingLeft: '5px' }}>Bot</span>
             <div className="flex-grow px-4 flex flex-col text-base text-[#343333]" style={{ paddingLeft: '10px' }}>
-              {/* <ChartComponent chartHtml={chartHtml} ref={target}  fullscreen={isFullscreen}  /> */}
               <span>{message}</span>
               <div style={{ width: '500px' }}>
-                <ChartComponent chartHtml={chartHtml} ref={target} message={message} style={{ marginLeft: '20%' }} />
+                {/* <ChartComponent chartHtml={chartHtml} ref={target} message={message} style={{ marginLeft: '20%' }} /> */}
+                <div id="viz-container"  style={{ width: '100%', margin: 'auto', textAlign: 'center', paddingBottom:'25px' }}>
+                  <div className='chartElement' id='chartIFrame' style={{backgroundColor:'#ECF0F1', border:'1px solid #ccc', width:'600px'}}>
+                    <iframe 
+                      id='chart-iframe'
+                      title="Chart Visualization"
+                      srcDoc={chartHtml}
+                      width="600" 
+                      height="400"
+                      frameBorder="0"
+                      style={{  borderRadius: '4px', marginTop: '20px',padding:'10px' }}
+                    >
+                    </iframe>  
+                    </div>
+                </div>
               </div>
               <div style={{ height: 500, width: '600px', backgroundColor: '#ECF0F1' }}>
               <DataGrid
@@ -98,9 +113,6 @@ const ChartResponse = ({ chartHtml, response }: Props) => {
                   getRowClassName={() => {
                     return 'custom-row';
                   }}
-                  // getHeaderClassName={(params) => {
-                  //   return 'custom-header';
-                  // }}
                 />
               </div>
             </div>

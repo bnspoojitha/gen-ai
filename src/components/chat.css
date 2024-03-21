@@ -1,3 +1,6 @@
+.chatPage{
+    overflow-y: auto;
+}
 .cardElement{
     display: flex;
     flex-direction: column;

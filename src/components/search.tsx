@@ -8,6 +8,8 @@ import './search.css';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { chatTypes } from './GlobalStateTypes';
+import Grid from '@mui/material/Grid';
+import { FaRegPaperPlane } from "react-icons/fa";
 // import htmlToImage from 'html-to-image';
 // import html2pdf from 'html2pdf.js';
 type Props = {
@@ -48,6 +50,7 @@ export default function Search() {
     //     return `${randomResponse}`;
     // }
 
+    const [isLoading, setIsLoading] = useState(false);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setGlobalSearchText(searchText);
@@ -58,6 +61,7 @@ export default function Search() {
             { text: searchText, type: chatTypes.Question }
         ]);
         try {
+            setIsLoading(true);
             let response: ApiResponse;
             if (searchText.trim().toLowerCase() === 'hi' || searchText.trim().toLowerCase() === 'hello') {
                 response = await getEmptyResponse();
@@ -84,6 +88,7 @@ export default function Search() {
             }
         } catch (error) {
             console.error('Error fetching response:', error);
+            setIsLoading(false);
         }
     };
 
@@ -158,12 +163,28 @@ export default function Search() {
                 maxWidth: '100%',
             }}
         >
-                <div className='searchBar'>
-                    <TextField sx={{width:'78%'}} id="fullWidth" value={searchText} onChange={handleOnChange} />
+               <Grid container spacing={2} alignItems="center">
+                <Grid item xs={12} md={8}>
+                    <TextField
+                        fullWidth
+                        id="fullWidth"
+                        value={searchText}
+                        onChange={handleOnChange}
+                        sx={{ borderRadius: 20 }}
+                    />
+                </Grid>
+                <Grid item xs={12} md={4}>
                     <button type="submit">
-                        <RocketIcon sx={{ fontSize: 50, color: '#EA4403', cursor: 'pointer' }} /> {/* Use button element instead */}
+                        <RocketIcon sx={{ fontSize: 50, color: '#EA4403', cursor: 'pointer' }} />
                     </button>
-                </div>
+                </Grid>
+            </Grid>
+                {/* <div className='searchBar'>
+                    <TextField sx={{width:'78%', borderRadius: '20px'}} id="fullWidth" value={searchText} onChange={handleOnChange} />
+                    <button type="submit">
+                        <RocketIcon sx={{ fontSize: 50, color: '#EA4403', cursor: 'pointer' }} /> 
+                    </button>
+                </div> */}
         </Box>
     );
 }

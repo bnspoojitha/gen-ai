@@ -12,6 +12,7 @@ type GlobalContextType = {
     setResponse: Dispatch<SetStateAction<any>>; 
     globalData: any[]; 
     setGlobalData: Dispatch<SetStateAction<any[]>>
+    
 };
 
 

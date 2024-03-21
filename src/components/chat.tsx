@@ -9,11 +9,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import "./chat.css";
-import ExploreIcon from '@mui/icons-material/Explore';
-import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import Button from '@mui/material/Button';
-import DownloadIcon from '@mui/icons-material/Download';
 import StartIcon from '@mui/icons-material/Start';
 import { chatTypes } from './GlobalStateTypes'; 
 import html2canvas from "html2canvas";
@@ -32,7 +27,7 @@ export default function Chat() {
     //   const questions = chats.filter(chat => chat.type === chatTypes.Question);
     // const answers = chats.filter(chat => chat.type === chatTypes.Answer);
 
-    const downloadChatbtn = async () => {
+    const downloadChatbtn =  () => {
 
         // const chatContainer = document.getElementById('chat-container');
         // const chartContainer = document.getElementById('chart-iframe') as HTMLIFrameElement;
@@ -91,10 +86,14 @@ export default function Chat() {
         //         });
         //     }, 1000); 
         // }
+
         const input =pdfRef.current;
-        if (input) {
-            html2canvas(input).then((canvas) => {
+          const chartIframe = document.getElementById('chat-container');
+        // const iframeContent = chartIframe?.contentWindow?.document.body;
+        if (chartIframe) {
+            html2canvas(chartIframe).then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
+                console.log("chartIframe",chartIframe);
                 const pdf = new jsPDF('p', 'mm', 'a4', true);
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
@@ -124,16 +123,16 @@ export default function Chat() {
                 </div>
                 <div className="cardElement">
                         <div className ="searchElementDetails">
-                            <div className="cardContent">
+                            <div className="cardContent" style={{display: 'flex', flexDirection: 'row', gap:'10px', margin:'10px'}} >
                                 <Typography className ="searchElementHeading" variant="h6"> <StartIcon  className="iconColor"/> Start Searching</Typography> 
-                                <div className="cardContainer">
+                                <div className="cardContainer" >
                                 <Card className="cardstyle" sx={{ maxWidth: 340, border: '1px solid #EA4403',borderRadius:'20px',backgroundColor:'#EE6302' }}>
                                     <CardContent>
                                     <Typography variant="body2" sx={{  color:'#ffff'}}> How many loans are at stree in each stage?</Typography>
                                     </CardContent>
                                 </Card>
                                 </div>
-                                <div>
+                                <div className="cardContainer" >
                                 <Card className="cardstyle" sx={{ maxWidth: 340, border: '1px solid #EA4403',borderRadius:'20px', padding: 0, backgroundColor:'#EE6302'}}>
                                     <CardContent>
                                     <Typography variant="body2"  sx={{  color:'#ffff'}}> How many loans are at stree in each stage?</Typography>
@@ -141,15 +140,15 @@ export default function Chat() {
                                 </Card>
                                 </div>
                             </div>
-                            <div className="cardContent">
-                            <div className="cardContainer">
+                            <div className="cardContent" style={{display: 'flex', flexDirection: 'row', gap:'10px'}}>
+                            <div className="cardContainer" style={{padding:'10px'}}>
                                 <Card className="cardstyle" sx={{ maxWidth: 340, border: '1px solid #EA4403',borderRadius:'20px', padding: 0,backgroundColor:'#EE6302' }}>
                                     <CardContent>
                                     <Typography variant="body2"  sx={{  color:'#ffff'}}> How many loans are at stree in each stage?</Typography>
                                     </CardContent>
                                 </Card>
                                 </div>
-                                <div className="cardContainer">
+                                <div className="cardContainer" style={{padding:'10px'}}>
                                 <Card className="cardstyle" sx={{ maxWidth: 340, border: '1px solid #EA4403',borderRadius:'20px', padding: 0,backgroundColor:'#EE6302' }}>
                                     <CardContent>
                                     <Typography variant="body2"  sx={{  color:'#ffff'}}> How many loans are at stree in each stage?</Typography>
@@ -162,7 +161,6 @@ export default function Chat() {
                 </Box>
               )}
               <div id="chat-container" ref={pdfRef}>
-                    {/* Render questions and answers */}
                     {chats.map((chat, index) => (
                         <React.Fragment key={index}>
                             {chat.type === chatTypes.Question && (
@@ -177,17 +175,14 @@ export default function Chat() {
                         </React.Fragment>
                     ))}
                 </div>
-         
         </Box>
         <Box>
-       
         </Box>
         <Box  sx={{ mt: 'auto', pt:10}} >
             <div className="fixed-bottom">
                 <Search />
                     <div className='footer'>
                         <span>Remember, my AI isn't perfect - double-check my responses before making any big decisions. </span>
-                        <Button variant="contained" className='downloadChatbtn' onClick={downloadChatbtn}><DownloadIcon /> Download chat </Button>
                     </div>
                     </div>
             </Box>

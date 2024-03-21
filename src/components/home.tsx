@@ -147,6 +147,7 @@ export default function Home() {
             <DrawerHeader />
             <Routes>
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/main" element={<Main />} />
                 {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
             <Chat />

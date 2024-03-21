@@ -14,7 +14,7 @@ import './Login.css';
 import Routes from "../Routes";
 
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
 const defaultTheme = createTheme();
 
 export default function LogIn() {
@@ -22,9 +22,6 @@ export default function LogIn() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
-   
-
     const handleSubmit = (e: any) => {
         e.preventDefault();
         console.log("Username: ", process.env.REACT_APP_USERNAME);
@@ -39,10 +36,8 @@ export default function LogIn() {
         } else {
           setError("Invalid username or password");
         }
-        // navigate('/home');
         console.log("LoggedIn");
       };
-
   return (
     // <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs" className="loginContainer" sx={{ bgcolor: '#ffff', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',  }}>
